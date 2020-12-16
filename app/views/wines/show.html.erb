@@ -1,0 +1,9 @@
+<% binding.pry %>
+<h1><%= @wine.wine_name %></h1>
+
+<%= link_to "New Food", new_wine_food_path(@wine) %>
+
+<p>Foods:</p>
+<% @wine.foods.each do |food| %>
+    <div>Name: <%= food.food_name %> Sweetness <%= food.food_sweetness %> Acidity <%= food.food_acidity %></div>
+<% end %>
