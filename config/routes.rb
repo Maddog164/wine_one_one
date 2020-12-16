@@ -6,4 +6,7 @@ Rails.application.routes.draw do
   end
 
   resources :foods
+
+  resources :users
+  
 end
