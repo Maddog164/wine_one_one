@@ -1,9 +1,20 @@
-<%= form_for @wine do |f| %>
-    <%= f.label :wine_name %>
-    <%= f.text_field :wine_name %>
-    <%= f.text_field :color %>
-    <%= f.text_field :grape %>
-    <%= f.text_field :avg_price %>
-    <%= f.text_field :acidity %>
-    <%= f.sweetness :sweetness %>
-<% end 5>
+<h1>Hi, <%= @user.user_name %></h1>
+
+<% if @wines != nil %>
+    <h3>You do not currently have any wines identified!</h3>
+    <br>
+    <%= form_tag ({controller: 'wines', action: 'new', method: 'get'}) do %>
+        <input type=submit value='add wines'>
+    <% end %>
+    <br>
+<% else %>
+    <h3>Here are your Wines: </h3>
+        <% binding.pry %>
+        <%= @wines.each do |w| %>
+        <li><%= link_to w.wine_name, wine_path %></li>
+        <% end %>
+<% end %>
+
+<%= form_tag ({controller: 'sessions', action: 'destroy', method: 'post'}) do %>
+    <input type=submit value='logout'>
+<% end %>

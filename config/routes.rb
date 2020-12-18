@@ -8,9 +8,9 @@ Rails.application.routes.draw do
  resources :users
 
  root 'welcome#home'
- 
-  resources :wines, only: [:show, :index] do
-    resources :foods, only: [:show, :index, :new]
+
+ resources :wines do
+    resources :foods, only: [:show, :index, :new, :edit]
   end
 
   resources :foods

@@ -1,0 +1,17 @@
+<h1>Add a Wine</h1>
+<br>
+<%= form_for @wine do |f| %>
+    <%= f.label :wine_name %>
+    <%= f.text_field :wine_name %>
+    <%= f.label :color %>
+    <%= f.text_field :color %>
+    <%= f.label :grape %>
+    <%= f.text_field :grape %>
+    <%= f.label :avg_price %>
+    <%= f.text_field :avg_price %>
+    <%= f.label :acidity %>
+    <%= f.text_field :acdity %>
+    <%= f.label :sweetness %>
+    <%= f.text_field :sweetness %>
+    <%= f.submit %>
+<% end %>
