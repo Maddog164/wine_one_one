@@ -1,17 +1,24 @@
 <h1>Add a Wine</h1>
 <br>
 <%= form_for @wine do |f| %>
+    <%= f.hidden_field :user_id %>
     <%= f.label :wine_name %>
     <%= f.text_field :wine_name %>
+    <br>
     <%= f.label :color %>
     <%= f.text_field :color %>
+    <br>
     <%= f.label :grape %>
     <%= f.text_field :grape %>
+    <br>
     <%= f.label :avg_price %>
     <%= f.text_field :avg_price %>
+    <br>
     <%= f.label :acidity %>
-    <%= f.text_field :acdity %>
+    <%= f.text_field :acidity %>
+    <br>
     <%= f.label :sweetness %>
     <%= f.text_field :sweetness %>
+    <br>
     <%= f.submit %>
 <% end %>

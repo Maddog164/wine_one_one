@@ -21,13 +21,27 @@ class WinesController < ApplicationController
 
     def create
         @wine = Wine.new(wine_params)
-        @wine.user_id = current_user.id
+        # @wine.user_id = current_user.id
         if @wine.save
-            redirect_to wine_path(@wine)
+            binding.pry
+            redirect_to @wine
         else
-            redirect_to new_wine_path
+            binding.pry
+            redirect_to controller: 'wines', action: 'index'
         end
     end
+
+    # def pairings_index
+    #     @wine = Wine.find(params[:id])
+    #     @pairings = @wine.pairings
+    #     render template: 'pairings/index'
+    # end
+
+    # def pairing
+    #     @wine = Wine.find(params[:id])
+    #     @pairing = @wine.pairings.find(params[:wine_id])
+    #     render template: 'pairings/show'
+    # end'
 
 
     private

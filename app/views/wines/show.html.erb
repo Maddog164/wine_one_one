@@ -4,6 +4,12 @@
 <%= link_to "New Food", new_wine_food_path(@wine) %>
 
 <p>Foods:</p>
-<% @wine.foods.each do |food| %>
-    <div>Name: <%= food.food_name %> Sweetness <%= food.food_sweetness %> Acidity <%= food.food_acidity %></div>
+
+
+<% if @wine.pairings != nil %>
+    <% @wine.pairings.foods.each do |food| %>
+        <div>Name: <%= food.food_name %> Sweetness <%= food.food_sweetness %> Acidity <%= food.food_acidity %></div>
+    <% end %>
+<% else %>
+    <p>There are no foods paired with this wine yet</p>
 <% end %>
