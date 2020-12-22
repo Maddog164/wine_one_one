@@ -10,8 +10,10 @@ class WinesController < ApplicationController
     end
 
     def new
+        binding.pry
         @wine = Wine.new
         @wine.user_id = current_user.id
+        binding.pry
     end
 
     def show
@@ -20,6 +22,7 @@ class WinesController < ApplicationController
     end
 
     def create
+        binding.pry
         @wine = Wine.new(wine_params)
         # @wine.user_id = current_user.id
         if @wine.save
@@ -31,23 +34,18 @@ class WinesController < ApplicationController
         end
     end
 
-    # def pairings_index
-    #     @wine = Wine.find(params[:id])
-    #     @pairings = @wine.pairings
-    #     render template: 'pairings/index'
+    # def parings_index
+    #     if params[:wine-id]
+    #         @pairings = Wine.find(params[:wine_id]).pairings
+    #     else
+    #         @pairings = Pairing.all
+    #     end
     # end
-
-    # def pairing
-    #     @wine = Wine.find(params[:id])
-    #     @pairing = @wine.pairings.find(params[:wine_id])
-    #     render template: 'pairings/show'
-    # end'
-
 
     private
 
     def wine_params
-        params.require(:wine).permit(:wine_name, :color, :grape, :avg_price, :acidity, :sweetness, :user_id)
+        params.require(:wine).permit(:wine_name, :color, :grape, :avg_price, :acidity, :sweetness, :user_id, food_ids: [])
     end
 
 end

@@ -1,1 +1,6 @@
-<h2><%= pairing.
+<h1>Food Pairings for <%= link_to pairing.wine.wine_name %></h1>
+
+<% @pairings.each do |pairing| %>
+    <li><%= display_wine(pairing.food) %> - <%= link_to pairing.food, wine_food_path(pairing.food) %></li>
+<% end %>
+

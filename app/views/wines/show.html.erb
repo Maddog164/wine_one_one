@@ -5,8 +5,8 @@
 
 <p>Foods:</p>
 
-
-<% if @wine.pairings != nil %>
+<% binding.pry %>
+<% if @wine.pairings != nil && @wine.pairings != [] %>
     <% @wine.pairings.foods.each do |food| %>
         <div>Name: <%= food.food_name %> Sweetness <%= food.food_sweetness %> Acidity <%= food.food_acidity %></div>
     <% end %>

@@ -4,6 +4,7 @@ class Wine < ApplicationRecord
     has_many :tasting_notes, through: :wine_tasting_notes
     has_many :pairings
     has_many :foods, through: :pairings
+    accepts_nested_attributes_for :foods
 
     # def wine_name=(name)
     #     self.wine= Wine.find_or_create_by(wine_name: name)

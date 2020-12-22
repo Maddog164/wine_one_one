@@ -7,7 +7,7 @@ class WinesController < ApplicationController
         if params[:wine_id]
             @pairings = Wine.find(params[:wine_id]).pairings
         else
-            @pairings = Pairings.all
+            @pairings = Pairing.all
         end
     end
 

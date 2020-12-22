@@ -3,7 +3,7 @@
 <% if @wines != nil %>
     <h3>You do not currently have any wines identified!</h3>
     <br>
-    <%= form_tag ({controller: 'wines', action: 'new', method: 'get'}) do %>
+    <%= form_tag new_wine_path, method: :get do %>
         <input type=submit value='add wines'>
     <% end %>
     <br>

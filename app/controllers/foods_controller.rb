@@ -4,6 +4,7 @@ require "./app/models/food"
 class FoodsController < ApplicationController
 
     def new
+        binding.pry
 	    @food = Food.new(wine_id: params[:wine_id])
     end
 
@@ -11,6 +12,6 @@ class FoodsController < ApplicationController
     private
 
     def food_params
-        params.require(:food).permit(:food_name, :food_sweetness, :food_acidity, :wine_id)
+        params.require(:food).permit(:food_name, :food_sweetness, :food_acidity, wine_ids: [])
     end
 end
