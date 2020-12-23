@@ -1,6 +1,9 @@
-<h1>Food Pairings for <%= link_to pairing.wine.wine_name %></h1>
+<h1>Food Pairings for <%= link_to @wine.wine_name, wine_path %></h1>
 
-<% @pairings.each do |pairing| %>
-    <li><%= display_wine(pairing.food) %> - <%= link_to pairing.food, wine_food_path(pairing.food) %></li>
+<% Food.all.each do |food| %>
+    <label>
+    <%= check_box_tag "wine[food_ids][]", food.id, @user.food_ids.include?(food.id) %>
+    <%= food.food_name %>
+    <br>
 <% end %>
 

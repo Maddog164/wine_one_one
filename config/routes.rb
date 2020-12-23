@@ -14,5 +14,7 @@ Rails.application.routes.draw do
   end
 
   resources :foods
+
+  resources :pairings
   
 end
