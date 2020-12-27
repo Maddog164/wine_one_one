@@ -1,0 +1,13 @@
+<%= form_for(@food) do |f| %>
+    <label>Food:</label><br>
+    <%= f.hidden_field :wine_id %>
+    <%= f.text_field :food_name %><br>
+    <br>
+    <label>Acidity:</label><br>
+    <%= f.text_area :food_acidity %><br>
+    <br>
+    <label>Sweetness:</label><br>
+    <%= f.text_area :food_sweetness %><br>
+    <br>
+    <%= f.submit %>
+<% end %>   

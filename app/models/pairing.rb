@@ -1,4 +1,4 @@
 class Pairing < ApplicationRecord
-    belongs_to :wines
-    belongs_to :foods
+    belongs_to :wine
+    belongs_to :food
 end

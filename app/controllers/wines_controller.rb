@@ -4,32 +4,33 @@ require "./app/models/wine"
 class WinesController < ApplicationController
 
     def index
+        # binding.pry
         @wines = Wine.where(:user_id => current_user.id)
-        binding.pry
+        # binding.pry
         # redirect_to 'index'
     end
 
     def new
-        binding.pry
+        # binding.pry
         @wine = Wine.new
         @wine.user_id = current_user.id
-        binding.pry
+        # binding.pry
     end
 
     def show
-        binding.pry
+        # binding.pry
         @wine = Wine.find(params[:id])
     end
 
     def create
-        binding.pry
+        # binding.pry
         @wine = Wine.new(wine_params)
         # @wine.user_id = current_user.id
         if @wine.save
-            binding.pry
+            # binding.pry
             redirect_to @wine
         else
-            binding.pry
+            # binding.pry
             redirect_to controller: 'wines', action: 'index'
         end
     end

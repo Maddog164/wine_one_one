@@ -1,6 +1,6 @@
 <h1>Hi, <%= @user.user_name %></h1>
 
-<% if @wines != nil %>
+<% if @wines == nil %>
     <h3>You do not currently have any wines identified!</h3>
     <br>
     <%= form_tag new_wine_path, method: :get do %>
@@ -9,11 +9,13 @@
     <br>
 <% else %>
     <h3>Here are your Wines: </h3>
-        <% binding.pry %>
-        <%= @wines.each do |w| %>
-        <li><%= link_to w.wine_name, wine_path %></li>
+        <% @wines.each do |w| %>
+        <li><%= link_to w.wine_name, wine_path(w.id) %></li>
         <% end %>
 <% end %>
+
+<br>
+
 
 <%= form_tag ({controller: 'sessions', action: 'destroy', method: 'post'}) do %>
     <input type=submit value='logout'>

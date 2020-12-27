@@ -4,8 +4,10 @@ require "./app/models/food"
 class FoodsController < ApplicationController
 
     def new
+        # binding.pry
+        @food = Food.new(wine_id: params[:wine_id])
+        @wine = Wine.find(id = params[:wine_id])
         binding.pry
-	    @food = Food.new(wine_id: params[:wine_id])
     end
 
 
