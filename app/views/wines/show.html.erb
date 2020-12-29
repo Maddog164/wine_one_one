@@ -1,15 +1,30 @@
 <h1><%= @wine.wine_name %></h1>
 
-<%= link_to "New Food", new_wine_food_path(@wine) %>
 
-<p>Foods:</p>
+<head>
+    <style type="text/css">
+        <!--
+        .tab {margin-left: 40px; }
+        -->
+    </style>
+</head>
+<h3>Pairs Well With:</h3>
 
 <% if @wine.foods != nil && @wine.foods != [] %>
-<% binding.pry %>
     <% @wine.foods.each do |food| %>
-        <div>Name: <%= food.food_name %> Sweetness <%= food.food_sweetness %> Acidity <%= food.food_acidity %></div>
+        <div><%= food.food_name %> 
+        <li class = "tab">Sweetness: <%= food.food_sweetness %>
+        <li class = "tab">Acidity: <%= food.food_acidity %></li>
+        <li class = "tab">Pairing Type: <%= Pairing.find_by(wine_id: @wine.id, food_id: food.id).pairing_type %>
+        <br>
+        </div> 
     <% end %>
 
 <% else %>
     <p>There are no foods paired with this wine yet</p>
 <% end %>
+
+<br>
+<br>
+
+<%= link_to "New Food", new_wine_food_path(@wine) %>

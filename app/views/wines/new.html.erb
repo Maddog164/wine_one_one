@@ -20,5 +20,10 @@
     <%= f.label :sweetness %>
     <%= f.text_field :sweetness %>
     <br>
+    <%= hidden_field_tag "wine[food_ids][]", nil %>
+    <% Food.all.each do |food| %>
+        <%= check_box_tag "wine[food_ids][]", food.id, @wine.food_ids.include?(food.id), id: dom_id(food) %>
+        <%= label_tag dom_id(food), food.food_name %><br>
+    <% end %>
     <%= f.submit %>
 <% end %>

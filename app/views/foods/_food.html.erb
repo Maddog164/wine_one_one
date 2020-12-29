@@ -1,6 +1,7 @@
 <%= form_for(@food) do |f| %>
+    <% binding.pry %>
     <label>Food:</label><br>
-    <%= f.hidden_field :wine_id %>
+    <%= f.hidden_field params[:wine_id] %>
     <%= f.text_field :food_name %><br>
     <br>
     <label>Acidity:</label><br>
