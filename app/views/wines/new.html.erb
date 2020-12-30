@@ -38,23 +38,23 @@
     <br>
     <strong><em>To Add a New Food Pairing:</em></strong>
     <br>
-    <%= f.fields_for :foods, @wine.foods.build do |food| %>
-        <%= food.label :"Food Name:" %>
-        <%= food.text_field :food_name %>
-        <%= food.label :"Food Acidity:" %>
-        <%= food.text_field :food_acidity %>
-        <%= food.label :"Food Sweetness:" %>
-        <%= food.text_field :food_sweetness %>
-        <br>
-        <%= fields_for :pairings do |p| %>
-            <%= p.label :"Type of Pairing:" %>
-            <%= p.radio_button :pairing_type, "Congruent", checked: true %>
-            <%= p.label :pairing_type, "Congruent", :value => "Congruent" %>
-            <%= p.radio_button :pairing_type, "Contrasting", checked: false %>
-            <%= p.label :pairing_type, "Contrasting", :value => "Contrasting" %>
-        <% end %>
+    <%= f.fields_for :foods, @wine.foods.build do |foods_fields| %>
+        <%= foods_fields.label :"Food Name:" %>
+        <%= foods_fields.text_field :food_name %>
+        <%= foods_fields.label :"Food Acidity:" %>
+        <%= foods_fields.text_field :food_acidity %>
+        <%= foods_fields.label :"Food Sweetness:" %>
+        <%= foods_fields.text_field :food_sweetness %>
     <% end %>
-    
+        <br>
+    <%= f.fields_for :pairings, @wine.pairings.build do |pairings_fields| %>
+        <%= pairings_fields.label :"Type of Pairing:" %>
+        <%= pairings_fields.radio_button :pairing_type, "Congruent", checked: true %>
+        <%= pairings_fields.label :pairing_type, "Congruent", :value => "Congruent" %>
+        <%= pairings_fields.radio_button :pairing_type, "Contrasting", checked: false %>
+        <%= pairings_fields.label :pairing_type, "Contrasting", :value => "Contrasting" %>
+    <% end %>
+        
     <br>
     <br>
     <%= f.submit %>
