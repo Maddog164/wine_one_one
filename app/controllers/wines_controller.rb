@@ -25,8 +25,13 @@ class WinesController < ApplicationController
     def create
         binding.pry
         @wine = Wine.new(wine_params)
+        
+        binding.pry
         # @wine.user_id = current_user.id
         if @wine.save
+            p = Pairing.last
+            p.pairing_type = params[:pairings][:pairing_type]
+            p.save
             # binding.pry
             redirect_to @wine
         else
@@ -46,7 +51,7 @@ class WinesController < ApplicationController
     private
 
     def wine_params
-        params.require(:wine).permit(:wine_name, :color, :grape, :avg_price, :acidity, :sweetness, :user_id, food_ids:[], pairings: [:pairing_type], foods_attributes: [:id, :food_name, :food_acidity, :food_sweetness])
+        params.require(:wine).permit(:wine_name, :color, :grape, :avg_price, :acidity, :sweetness, :user_id, food_ids:[], foods_attributes: [:id, :food_name, :food_acidity, :food_sweetness], pairings: [:pairing_type])
     end
 
 end

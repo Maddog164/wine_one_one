@@ -46,12 +46,12 @@
         <%= food.label :"Food Sweetness:" %>
         <%= food.text_field :food_sweetness %>
         <br>
-        <%= fields_for :pairings, @wine do |i| %>
-            <%= i.label :"Type of Pairing:" %>
-            <%= i.radio_button :pairing_type, "Congruent", checked: true %>
-            <%= i.label :pairing_type, "Congruent", :value => "Congruent" %>
-            <%= i.radio_button :pairing_type, "Contrasting", checked: false %>
-            <%= i.label :pairing_type, "Contrasting", :value => "Contrasting" %>
+        <%= fields_for :pairings do |p| %>
+            <%= p.label :"Type of Pairing:" %>
+            <%= p.radio_button :pairing_type, "Congruent", checked: true %>
+            <%= p.label :pairing_type, "Congruent", :value => "Congruent" %>
+            <%= p.radio_button :pairing_type, "Contrasting", checked: false %>
+            <%= p.label :pairing_type, "Contrasting", :value => "Contrasting" %>
         <% end %>
     <% end %>
     
