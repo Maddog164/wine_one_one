@@ -10,10 +10,11 @@ class FoodsController < ApplicationController
     
     def new
         binding.pry
+        @food = Food.new
+        @wine = Wine.find(id = params[:wine_id])
         if params[:wine_id]
             @pairing = Pairing.new(wine_id: params[:wine_id])
-        @wine = Wine.find(id = params[:wine_id])
-        @food = Food.new
+        end
         binding.pry
     end
 

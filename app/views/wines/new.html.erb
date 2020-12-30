@@ -39,6 +39,7 @@
     <strong><em>To Add a New Food Pairing:</em></strong>
     <br>
     <%= f.fields_for :foods, @wine.foods.build do |foods_fields| %>
+        <%= foods_fields.hidden_field :id %>
         <%= foods_fields.label :"Food Name:" %>
         <%= foods_fields.text_field :food_name %>
         <%= foods_fields.label :"Food Acidity:" %>
@@ -54,6 +55,7 @@
         <%= pairings_fields.radio_button :pairing_type, "Contrasting", checked: false %>
         <%= pairings_fields.label :pairing_type, "Contrasting", :value => "Contrasting" %>
     <% end %>
+    
         
     <br>
     <br>

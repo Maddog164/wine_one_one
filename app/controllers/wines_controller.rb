@@ -14,8 +14,8 @@ class WinesController < ApplicationController
         # binding.pry
         @wine = Wine.new
         @wine.user_id = current_user.id
-        @wine.foods.build
-        @wine.pairings.build
+        # @wine.foods.build
+        # @wine.pairings.build
         # binding.pry
     end
 
@@ -26,25 +26,25 @@ class WinesController < ApplicationController
 
     def create
         binding.pry
-        @wine = Wine.create(wine_params)
-        if wine_params[:foods_attributes]["0"] != nil && wine_params[:foods_attributes]["0"] != []
-            food = @wine.foods.build(wine_params[:foods_attributes]["0"])
-            food.save
-            newfood = true
+        @wine = Wine.new(wine_params)
+        # if wine_params[:foods_attributes]["0"] != nil && wine_params[:foods_attributes]["0"] != []
+        #     food = @wine.foods.build(wine_params[:foods_attributes]["0"])
+        #     food.save
+        #     newfood = true
 
-        end
-        # if wine_params[:foods_attributes]["1"] != nil && wine_params[:foods_attributes]["1"] != []
-        #     @wine.foods.build(wine_params[:foods_attributes]["1"])
         # end
-        if wine_params[:pairings_attributes]["0"] != nil && wine_params[:pairings_attributes]["0"] != []
-            pairing = @wine.pairings.build(wine_params[:pairings_attributes]["0"])
-            pairing.save
-        end
-        if wine_params[:pairings_attributes]["1"] != nil && wine_params[:pairings_attributes]["1"] != []
-            pairing = @wine.pairings.build(wine_params[:pairings_attributes]["1"])
-            pairing.save
+        # # if wine_params[:foods_attributes]["1"] != nil && wine_params[:foods_attributes]["1"] != []
+        # #     @wine.foods.build(wine_params[:foods_attributes]["1"])
+        # # end
+        # if wine_params[:pairings_attributes]["0"] != nil && wine_params[:pairings_attributes]["0"] != []
+        #     pairing = @wine.pairings.build(wine_params[:pairings_attributes]["0"])
+        #     pairing.save
+        # end
+        # if wine_params[:pairings_attributes]["1"] != nil && wine_params[:pairings_attributes]["1"] != []
+        #     pairing = @wine.pairings.build(wine_params[:pairings_attributes]["1"])
+        #     pairing.save
 
-        end
+        # end
         # if newfood
         #     new_pairing = pairing.food.build(food.id)
         #     new_pairing.save
@@ -53,15 +53,15 @@ class WinesController < ApplicationController
         binding.pry
         # @wine.user_id = current_user.id
         if @wine.save
-            flash[:success] = "New Wine Created!"
+            # flash[:success] = "New Wine Created!"
             # p = Pairing.last
             # p.pairing_type = params[:pairings][:pairing_type]
             # p.save
             # binding.pry
-            redirect_to @wine
+            redirect_to @wine, notice: "Successfully created Wine"
         else
             # binding.pry
-            redirect_to controller: 'wines', action: 'index'
+            render :new
         end
     end
 
@@ -77,7 +77,7 @@ class WinesController < ApplicationController
 
     def wine_params
         params.require(:wine).permit(:wine_name, :color, :grape, :avg_price, :acidity, :sweetness, :user_id, food_ids:[],\
-        foods_attributes: [:food_name, :food_sweetness, :food_acidity], pairings_attributes: [:pairing_type])
+        foods_attributes: [:id, :food_name, :food_sweetness, :food_acidity], pairings_attributes: [:pairing_type])
     end
 
 end
