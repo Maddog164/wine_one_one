@@ -21,6 +21,6 @@ class FoodsController < ApplicationController
     private
 
     def food_params
-        params.require(:food).permit(:food_name, :food_sweetness, :food_acidity, wine_ids: [])
+        params.require(:food).permit(:food_name, :food_sweetness, :food_acidity, wine_ids: [], pairings_attributes: [:pairing_type])
     end
 end

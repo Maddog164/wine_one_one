@@ -23,7 +23,7 @@ class WinesController < ApplicationController
     end
 
     def create
-        # binding.pry
+        binding.pry
         @wine = Wine.new(wine_params)
         # @wine.user_id = current_user.id
         if @wine.save
@@ -46,7 +46,7 @@ class WinesController < ApplicationController
     private
 
     def wine_params
-        params.require(:wine).permit(:wine_name, :color, :grape, :avg_price, :acidity, :sweetness, :user_id, food_ids: [])
+        params.require(:wine).permit(:wine_name, :color, :grape, :avg_price, :acidity, :sweetness, :user_id, food_ids:[], pairings: [:pairing_type], foods_attributes: [:id, :food_name, :food_acidity, :food_sweetness])
     end
 
 end
