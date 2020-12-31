@@ -14,7 +14,8 @@ class WinesController < ApplicationController
         # binding.pry
         @wine = Wine.new
         @wine.user_id = current_user.id
-        # @wine.foods.build
+        pairing = @wine.pairings.build
+        pairing.foods.build
         # @wine.pairings.build
         # binding.pry
     end
