@@ -14,8 +14,8 @@ class WinesController < ApplicationController
         # binding.pry
         @wine = Wine.new
         @wine.user_id = current_user.id
-        pairing = @wine.pairings.build
-        pairing.foods.build
+        # pairing = @wine.pairings.build
+        # pairing.foods.build
         # @wine.pairings.build
         # binding.pry
     end
@@ -54,10 +54,6 @@ class WinesController < ApplicationController
         binding.pry
         # @wine.user_id = current_user.id
         if @wine.save
-            # flash[:success] = "New Wine Created!"
-            # p = Pairing.last
-            # p.pairing_type = params[:pairings][:pairing_type]
-            # p.save
             # binding.pry
             redirect_to @wine, notice: "Successfully created Wine"
         else
@@ -78,7 +74,7 @@ class WinesController < ApplicationController
 
     def wine_params
         params.require(:wine).permit(:wine_name, :color, :grape, :avg_price, :acidity, :sweetness, :user_id, food_ids:[],\
-        foods_attributes: [:id, :food_name, :food_sweetness, :food_acidity], pairings_attributes: [:pairing_type])
+        foods_attributes: [:id, :food_name, :food_sweetness, :food_acidity], pairing_ids:[], pairings_attributes: [:id, :pairing_type])
     end
 
 end

@@ -12,16 +12,27 @@ class FoodsController < ApplicationController
         binding.pry
         @food = Food.new
         @wine = Wine.find(id = params[:wine_id])
-        if params[:wine_id]
-            @pairing = Pairing.new(wine_id: params[:wine_id])
-        end
         binding.pry
+    end
+
+    def create
+        binding.pry
+        @food = Food.new(food_params)
+        binding.pry
+        if @food.save
+            # binding.pry
+            redirect_to @wine, notice: "Successfully created Wine"
+        else
+            # binding.pry
+            render :new
+        end
     end
 
 
     private
 
     def food_params
-        params.require(:food).permit(:food_name, :food_sweetness, :food_acidity, wine_ids: [], pairings_attributes: [:pairing_type])
+        params.require(:food).permit(:food_name, :food_sweetness, :food_acidity, wine: [:id], pairings_attributes: [:id, :pairing_type])
     end
+
 end

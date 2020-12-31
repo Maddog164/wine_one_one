@@ -1,4 +1,16 @@
-<h1>Enter a New Food to Pair with <%= @wine.wine_name %></h1>
+<head>
+    <style type="text/css">
+    div.settings {
+        display:grid;
+        grid-template-columns: max-content max-content;
+        grid-gap:5px;
+    }
+    div.settings label          { text-align:right; }
+    div.settings label:after    { content: ":"; }
+    </style>
+</head>
+
+<h2>Enter a New Food to Pair with <%= @wine.wine_name %></h2>
 <br>
 
 <%= render "food" %>
