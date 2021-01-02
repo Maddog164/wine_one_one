@@ -14,7 +14,10 @@ class WinesController < ApplicationController
         # binding.pry
         @wine = Wine.new
         @wine.user_id = current_user.id
-        # pairing = @wine.pairings.build
+        @pairings = @wine.pairings.build
+        @food = @pairings.build_food
+        # @wine.pairings.build
+        binding.pry
         # pairing.foods.build
         # @wine.pairings.build
         # binding.pry
@@ -73,8 +76,12 @@ class WinesController < ApplicationController
     private
 
     def wine_params
-        params.require(:wine).permit(:wine_name, :color, :grape, :avg_price, :acidity, :sweetness, :user_id, food_ids:[],\
-        foods_attributes: [:id, :food_name, :food_sweetness, :food_acidity], pairing_ids:[], pairings_attributes: [:id, :pairing_type])
+        params.require(:wine).permit(:id, :wine_name, :color, :grape, :avg_price, :acidity, :sweetness, :user_id, pairings_attributes: [:id, :pairing_type], food_ids:[],\
+        food_attributes: [:id, :food_name, :food_acidity, :food_sweetness])
     end
+
+    # params.require(:wine).permit(:id, :wine_name, :color, :grape, :avg_price, :acidity, :sweetness, :user_id, food_ids:[],\
+    #     food_attributes: [:id, :food_name, :food_acidity, :food_sweetness], pairing_ids:[], pairings_attributes: [:id, :pairing_type])
+    
 
 end

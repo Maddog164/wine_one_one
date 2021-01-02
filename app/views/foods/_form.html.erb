@@ -1,0 +1,39 @@
+<head>
+    <style type="text/css">
+    div.settings {
+        display:grid;
+        grid-template-columns: max-content max-content;
+        grid-gap:5px;
+    }
+    div.settings label          { text-align:right; }
+    div.settings label:after    { content: ":"; }
+    </style>
+</head>
+
+<h1>Create a New Pairing for <%= @wine.wine_name %></h1>
+<br>
+<%= form_for @food do |f| %>
+    <div class ="settings">
+    <%= f.hidden_field :wine_id, value: @wine.id %>
+    <h3>Choose a Food:</h3><p><%= f.collection_select :food, Food.all, :id, :food_name %>
+    <br>
+    <br>
+    <h3>Or Enter a New Food:</h3>
+    <br>
+    <%= f.fields_for :foods, Food.new do |food_builder| %>
+        <%= food_builder.label :food_name %>
+        <%= food_builder.text_field :food_name %>
+        <%= food_builder.label :food_sweetness %>
+        <%= food_builder.text_field :food_sweetness %>
+        <%= food_builder.label :food_acidity %>
+        <%= food_builder.text_field :food_acidity %>
+    <% end %>
+    <h3>Type of Pairing: </h3>
+    <br>
+    <%= f.label :pairing_type, "Congruent", "value" => "Congruent" %><%= f.radio_button :pairing_type, "Congruent", checked: true %>
+    <%= f.label :pairing_type, "Contrasting", "value" => "Contrasting" %><%= f.radio_button :pairing_type, "Contrasting", checked: false %>
+    <br>
+    </div>
+        <br>
+    <%= f.submit %>
+<% end %>

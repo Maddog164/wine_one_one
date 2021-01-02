@@ -1,7 +1,7 @@
 require './config/environment'
 require "./app/models/wine"
 
-class WinesController < ApplicationController
+class PairingsController < ApplicationController
 
     
     
@@ -14,8 +14,28 @@ class WinesController < ApplicationController
         end
     end
 
+    def new
+        binding.pry
+        @wine = Wine.find(params[:wine_id])
+        @wine.pairings << Pairing.find_by(params[:wine_id])
+        # @pairing = Pairing.new
+        # @wine.user_id = current_user.id
+        # pairing = @wine.pairings.build
+        # pairing.foods.build
+        # @wine.pairings.build
+        # binding.pry
+    end
+
     def create
-        Pairing.create(pairing_params)
+        @pairing = Pairing.create(pairing_params)
+        binding.pry
+        if @pairing.save
+            binding.pry
+            redirect_to @pairing, notice: "Created a New Pairing"
+        else
+            # binding.pry
+            render :new
+        end
     end
 
     def show
@@ -25,7 +45,10 @@ class WinesController < ApplicationController
     private
 
     def pairing_params
-        params.require(:pairing).permit(:wine, wine_ids: [], :food, food_ids: [])
+        params.require(:pairing).permit(:pairing_type, :wine_id, food_ids: [], foods_attributes: [:id, :food_name, :food_sweetness, :food_acidity])
+
     end
 
+    # params.require(:wine).permit(:wine_name, :color, :grape, :avg_price, :acidity, :sweetness, :user_id, food_ids:[],\
+    #     foods_attributes: [:id, :food_name, :food_sweetness, :food_acidity], pairing_ids:[], pairings_attributes: [:id, :pairing_type])
 end

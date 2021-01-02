@@ -11,7 +11,8 @@ class FoodsController < ApplicationController
     def new
         binding.pry
         @food = Food.new
-        @wine = Wine.find(id = params[:wine_id])
+        @wine = Wine.find(params[:wine_id])
+        @pairing = Pairing.new(wine_id: params[:wine_id])
         binding.pry
     end
 
@@ -20,8 +21,8 @@ class FoodsController < ApplicationController
         @food = Food.new(food_params)
         binding.pry
         if @food.save
-            # binding.pry
-            redirect_to @wine, notice: "Successfully created Wine"
+            binding.pry
+            redirect_to @wine, notice: "Successfully created Pairing"
         else
             # binding.pry
             render :new

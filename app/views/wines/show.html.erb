@@ -10,12 +10,12 @@
 </head>
 <h3>Pairs Well With:</h3>
 
-<% if @wine.foods != nil && @wine.foods != [] %>
-    <% @wine.foods.each do |food| %>
-        <div><%= food.food_name %> 
-        <li class = "tab">Sweetness: <%= food.food_sweetness %>
-        <li class = "tab">Acidity: <%= food.food_acidity %></li>
-        <li class = "tab">Pairing Type: <%= Pairing.find_by(wine_id: @wine.id, food_id: food.id).pairing_type %>
+<% if @wine.pairings != nil && @wine.pairings != [] %>
+    <% @wine.pairings.each do |p| %>
+        <div><%= p.food.food_name %> 
+        <li class = "tab">Sweetness: <%= p.food.food_sweetness %>
+        <li class = "tab">Acidity: <%= p.food.food_acidity %></li>
+        <li class = "tab">Pairing Type: <%= p.pairing_type %>
         <br>
         </div> 
     <% end %>
@@ -27,4 +27,4 @@
 <br>
 <br>
 
-<%= link_to "New Food", new_wine_food_path(@wine) %>
+<%= link_to "New Pairing", new_wine_food_path(@wine) %>

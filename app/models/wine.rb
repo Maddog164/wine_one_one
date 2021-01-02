@@ -7,16 +7,27 @@ class Wine < ApplicationRecord
     accepts_nested_attributes_for :pairings, :allow_destroy => true
     accepts_nested_attributes_for :foods
 
-    def foods_attributes=(foods_hashes)
-        # Prevents multiples of same food being added to foods table
-        foods_hashes.each do |i, food_attributes|
-            if food_attributes[:food_name].present?
-                food = Food.find_or_create_by(food_name: food_attributes[:food_name])
-                if !self.foods.include?(food)
-                    self.pairings.build(:food => food)
-                end
+    # def foods_attributes=(foods_hashes)
+    #     # Prevents multiples of same food being added to foods table
+    #     foods_hashes.each do |i, food_attributes|
+    #         if food_attributes[:food_name].present?
+    #             food = Food.find_or_create_by(food_name: food_attributes[:food_name])
+    #             if !self.foods.include?(food)
+    #                 self.pairings.build(:food => food)
+    #             end
+    #         end
+    #     end
+    # end
+
+    def pairings_attributes=(attributes)
+        attributes.values.each do |att|
+            if !att[:food_id].blank? || !att[:food_attributes].blank?
+                pairing = Pairing.new(att)
+                pairing.wine = self
+                self.pairings << pairing
             end
         end
     end
+                
    
 end
