@@ -16,8 +16,6 @@ class WinesController < ApplicationController
         @pairings = @wine.pairings.build
         # @food = @pairings.build_food
         
-        binding.pry
-        
     end
 
     def show

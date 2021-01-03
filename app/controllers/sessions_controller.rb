@@ -1,6 +1,12 @@
 class SessionsController < ApplicationController
 
+    #logging user in, logging user out, omniauth
+
     def new
+    end
+
+    def omniauth #log users in with omniauth
+
     end
 
     def create

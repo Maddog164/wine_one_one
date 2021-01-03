@@ -49,13 +49,18 @@
         
         <br>
         <br>
+        
+        <strong>Type of Pairing: </strong>
+        <%= f.fields_for :pairings do |fff| %>
+            <%= fff.label :pairing_type, "Congruent", "value" => "Congruent" %><%= fff.radio_button :pairing_type, "Congruent", checked: true %>
+            <%= fff.label :pairing_type, "Contrasting", "value" => "Contrasting" %><%= fff.radio_button :pairing_type, "Contrasting", checked: false %>
+            <% end %>  
+
+
     <% end %>
-    <strong>Type of Pairing: </strong>
     
-    <%= f.fields_for :pairings do |fff| %>
-    <%= fff.label :pairing_type, "Congruent", "value" => "Congruent" %><%= fff.radio_button :pairing_type, "Congruent", checked: true %>
-    <%= fff.label :pairing_type, "Contrasting", "value" => "Contrasting" %><%= fff.radio_button :pairing_type, "Contrasting", checked: false %>
-    <% end %>      
+    
+        
     <br>
     <br>
     <%= f.submit %>

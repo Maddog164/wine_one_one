@@ -12,7 +12,7 @@ class FoodsController < ApplicationController
         binding.pry
         @food = Food.new
         @wine = Wine.find(params[:wine_id])
-        @pairing = Pairing.new(wine_id: params[:wine_id])
+        @pairings = @wine.pairings.build
         binding.pry
     end
 
