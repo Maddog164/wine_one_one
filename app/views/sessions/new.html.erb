@@ -1,12 +1,27 @@
-<%= flash[:message] %>
+<head>
+    <style type="text/css">
+    div.settings {
+        display:grid;
+        grid-template-columns: max-content max-content;
+        grid-gap:5px;
+    }
+    div.settings label          { text-align:right; }
+    div.settings label:after    { content: ":"; }
+    </style>
+</head>
 
+<div class ="settings">
 <%= form_for @user, url: login_path, method: :post do |f| %>
+    <br>
     <%= f.label :user_name %>
     <%= f.text_field :user_name %>
-
+    <br>
+    <br>
     <%= f.label :password %>
     <%= f.password_field :password %>
-
-    <%= f.submit "log in" %>
-    Or <%= link_to(controller: 'users', action: 'new') {'sign up'} %>
+    <br>
+    <br>
+    <%= f.submit "log in", value: "Log In" %>
+    Or <%= link_to(controller: 'users', action: 'new') {'Sign Up'} %>     <%=button_to "Log In with Google", '/auth/google_oauth2' %>
 <% end %>
+</div>
