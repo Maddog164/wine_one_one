@@ -9,8 +9,8 @@ Rails.application.routes.draw do
 
  resources :users
 
- root 'welcome#home'
- get 'welcome/home' => 'welcome#home'
+ root 'sessions#new'
+ get 'sessions/new' => 'sessions#new'
 
  resources :wines do
     resources :foods, only: [:show, :index, :new, :edit]

@@ -4,9 +4,8 @@ require "./app/models/wine"
 class WinesController < ApplicationController
 
     def index
-        # binding.pry
         @wines = Wine.where(:user_id => current_user.id)
-        
+        binding.pry
     end
 
     def new
@@ -31,9 +30,9 @@ class WinesController < ApplicationController
         # @wine.user_id = current_user.id
         if @wine.save
             # binding.pry
-            p = Pairing.last
-            p.pairing_type = wine_params[:pairings_attributes]["0"][:pairing_type]
-            p.save
+            # p = Pairing.last
+            # p.pairing_type = wine_params[:pairings_attributes]["0"][:pairing_type]
+            # p.save
             redirect_to @wine, notice: "Successfully created Wine"
         else
             # binding.pry

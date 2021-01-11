@@ -9,19 +9,28 @@
     div.settings label:after    { content: ":"; }
     </style>
 </head>
+<% flash.each do |type, msg| %>
+    <div>
+        <%= msg %>
+    </div>
+<% end %>
 
-<div class ="settings">
 <%= form_for @user, url: login_path, method: :post do |f| %>
-    <br>
+    <div class ="settings">
+    
     <%= f.label :user_name %>
     <%= f.text_field :user_name %>
-    <br>
-    <br>
+    
+    
     <%= f.label :password %>
     <%= f.password_field :password %>
+    </div>
     <br>
-    <br>
+        
     <%= f.submit "log in", value: "Log In" %>
-    Or <%= link_to(controller: 'users', action: 'new') {'Sign Up'} %>     <%=button_to "Log In with Google", '/auth/google_oauth2' %>
 <% end %>
-</div>
+    <%=button_to "Sign Up", new_user_path, method: :get %>
+    <%=button_to "Log In with Google", '/auth/google_oauth2' %>
+    
+
+

@@ -1,6 +1,6 @@
 <h1>Hi, <%= @user.user_name %></h1>
 
-<% if @wines == nil %>
+<% if @wines == nil || @wines == []  %>
     <h3>You do not currently have any wines identified!</h3>
     <br>
     <%= form_tag new_wine_path, method: :get do %>
