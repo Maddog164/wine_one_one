@@ -5,9 +5,11 @@ class WinesController < ApplicationController
 
     def index
         @wines = Wine.where(:user_id => current_user.id)
-        binding.pry
+        # render template: 'foods/index'
+        
     end
 
+    
     def new
         # binding.pry
         @wine = Wine.new
@@ -25,10 +27,11 @@ class WinesController < ApplicationController
     def create
         binding.pry
         @wine = Wine.new(wine_params)
-               
-        binding.pry
+        @wine.update_attributes(wine_params)       
+       
         # @wine.user_id = current_user.id
         if @wine.save
+            # p = Pairing.where(:wine_=@wine.id, :food_id = wine_params)
             # binding.pry
             # p = Pairing.last
             # p.pairing_type = wine_params[:pairings_attributes]["0"][:pairing_type]
@@ -44,7 +47,7 @@ class WinesController < ApplicationController
 
     def wine_params
         params.require(:wine).permit(:id, :wine_name, :color, :grape, :avg_price, :acidity, :sweetness, :user_id, food_ids:[],\
-        foods_attributes: [:id, :food_name, :food_acidity, :food_sweetness], pairings_attributes: [:id, :pairing_type])
+        foods_attributes: [:id, :food_name, :food_acidity, :food_sweetness], pairing_ids:[], pairings_attributes: [:pairing_type])
     end
 
 end

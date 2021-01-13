@@ -4,17 +4,27 @@ require "./app/models/food"
 class FoodsController < ApplicationController
 
     
-    def show
-        @food = Food.find(params[:id])
+    def index
+        if params[:wine_id]
+            @foods = Wine.find(params[:wine_id]).foods
+        else
+            @foods = Food.all
+        end
     end
     
+    def show
+        binding.pry
+        @food = Food.find(params[:id])
+    end
+  
     def new
-        # binding.pry
+        binding.pry
         if params[:wine_id] && !Wine.exists?(params[:wine_id])
             redirect_to wines_path, alert: "Wine not found"
         else
             # @food = Food.new
             @wine = Wine.find(params[:wine_id])
+            # @food = Food.new(wine_id: params[:wine_id])
             @pairings = @wine.pairings.build
         end
         binding.pry
@@ -39,6 +49,7 @@ class FoodsController < ApplicationController
     end
 
     def update
+        binding.pry
         @food = Food.find(params[:id])
         @food.update(food_params)
         redirect_to_food_path(@food)

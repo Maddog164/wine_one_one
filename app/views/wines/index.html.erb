@@ -10,12 +10,16 @@
 <% else %>
     <h3>Here are your Wines: </h3>
         <% @wines.each do |w| %>
-        <li><%= link_to w.wine_name, wine_path(w.id) %></li>
+        <li><%= link_to w.wine_name, wines_path(w.id) %></li>
         <% end %>
 <% end %>
 
 <br>
 
+<%= link_to "Add a New Wine", action: 'new' %>
+    
+<br>
+<br>
 
 <%= form_tag ({controller: 'sessions', action: 'destroy', method: 'post'}) do %>
     <input type=submit value='logout'>

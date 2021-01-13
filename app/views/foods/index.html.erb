@@ -1,0 +1,16 @@
+<head>
+    <style type="text/css">
+    div.settings {
+        display:grid;
+        grid-template-columns: max-content max-content;
+        grid-gap:5px;
+    }
+    div.settings label          { text-align:right; }
+    div.settings label:after    { content: ":"; }
+    </style>
+</head>
+
+<h3>Here are your Foods: </h3>
+<% @foods.each do |f| %>
+<li><%= link_to f.food_name, food_path(f.id) %></li>
+<% end %>

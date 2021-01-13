@@ -1,9 +1,11 @@
 <h2><%= @food.food_name %></h2>
 <p>
-Acidity: <%= @food.acidity %>
-Sweetness: <%= @food.sweetness %>
+Acidity: <%= @food.food_acidity %>
+Sweetness: <%= @food.food_sweetness %>
 </p>
-Pairs Well With:
+<h3>Pairs Well With:</h3>
+
 <% @food.wines.each do |wine| %>
-    <%= link_to wine.wine_name, wine_path(w.wine_name) %>
+    <%= link_to wine.wine_name, wine_path(wine) %>
+    <br>
 <% end %>

@@ -13,8 +13,11 @@ Rails.application.routes.draw do
  get 'sessions/new' => 'sessions#new'
 
  resources :wines do
-    resources :foods, only: [:show, :index, :new, :edit]
+    resources :foods, only: [:show, :index, :new]
   end
+
+  # get 'wines/:id/foods', to: 'wines#foods_index' #nested routing
+  # get 'wines/:id/foods/:food_id', to:'wines#food' #nested routing
 
   resources :foods
 
