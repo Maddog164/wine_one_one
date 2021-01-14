@@ -10,7 +10,7 @@
 <% else %>
     <h3>Here are your Wines: </h3>
         <% @wines.each do |w| %>
-        <li><%= link_to w.wine_name, wines_path(w.id) %></li>
+        <li><%= link_to w.wine_name, wine_path(w) %></li>
         <% end %>
 <% end %>
 

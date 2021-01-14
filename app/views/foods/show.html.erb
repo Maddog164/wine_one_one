@@ -7,5 +7,6 @@ Sweetness: <%= @food.food_sweetness %>
 
 <% @food.wines.each do |wine| %>
     <%= link_to wine.wine_name, wine_path(wine) %>
+    
     <br>
 <% end %>

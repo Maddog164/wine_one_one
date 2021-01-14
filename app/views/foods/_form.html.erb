@@ -29,7 +29,7 @@
 
         <br>
         <strong>Type of Pairing: </strong>
-        <%= hidden_field_tag "food[pairing_ids][]", nil %>
+        
         <%= ff.fields_for :pairings, @wine.pairings.build do |fff| %>
                 <%= fff.label :pairing_type, "Congruent", "value" => "Congruent" %><%= fff.radio_button :pairing_type, "Congruent", checked: true %>
                 <%= fff.label :pairing_type, "Contrasting", "value" => "Contrasting" %><%= fff.radio_button :pairing_type, "Contrasting", checked: false %>

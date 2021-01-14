@@ -27,10 +27,12 @@ class WinesController < ApplicationController
     def create
         binding.pry
         @wine = Wine.new(wine_params)
-        @wine.update_attributes(wine_params)       
-       
+        
+        # @wine.update_attributes(wine_params)       
+        binding.pry
         # @wine.user_id = current_user.id
         if @wine.save
+            pairing = Pairing(wine_id: @wine.id, food_id: wine_params())
             # p = Pairing.where(:wine_=@wine.id, :food_id = wine_params)
             # binding.pry
             # p = Pairing.last
@@ -41,6 +43,15 @@ class WinesController < ApplicationController
             # binding.pry
             render :new
         end
+    end
+
+    def update
+        binding.pry
+        @wine = Wine.find(params[:id])
+        @wine.update(wine_params)
+        @food = Food.find(params[:food_id])
+        # redirect_to wine_food_path(wine_params[:foods_attributes][:])
+        render template: 'foods/show'
     end
 
     private

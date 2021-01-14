@@ -7,21 +7,26 @@ class Wine < ApplicationRecord
     accepts_nested_attributes_for :pairings, :allow_destroy => true
     accepts_nested_attributes_for :foods
 
-        def pairings_attributes=(attributes)
-            attributes.values.each do |att|
-                if !att[:food_id].blank? || !att[:food_attributes].blank?
-                    pairing = Pairing.new(att)
-                    pairing.wine = self
-                    self.pairings << pairing
-                end
+    def foods_attributes=(attributes)
+        binding.pry
+        attributes.values.each do |att|
+            if !att[:food_name].blank?
+                food = Food.new(att)
+                self.foods << food
+                # @has_food = true #to use to assess for pairing
             end
-        end
+            
+        end 
+    end
 
-        # def food_attributes=(attributes)
-        #     food = Food.find_or_create_by(attributes)
-        #     self.food_id = food.id
-        #     binding.pry
-        # end
-                
+    def pairings_attributes=(attributes)
+        binding.pry
+        # attributes.values.each do |att|
+        pairing = Pairing.new(attributes["0"])
+        
+        # self.pairings << pairing
+        # pairing.pairing_type = 
+        binding.pry
+    end      
    
 end
