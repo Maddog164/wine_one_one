@@ -26,17 +26,19 @@
         <%= ff.text_field :food_sweetness %>
         </div>
 
-
+        <% end %>   
+        
         <br>
         <strong>Type of Pairing: </strong>
         
-        <%= ff.fields_for :pairings, @wine.pairings.build do |fff| %>
-                <%= fff.label :pairing_type, "Congruent", "value" => "Congruent" %><%= fff.radio_button :pairing_type, "Congruent", checked: true %>
-                <%= fff.label :pairing_type, "Contrasting", "value" => "Contrasting" %><%= fff.radio_button :pairing_type, "Contrasting", checked: false %>
-            <% end %> 
-    <% end %>
+        <%= f.fields_for :pairings, @wine.pairings.build do |ff| %>
+                <%= ff.label :pairing_type, "Congruent", "value" => "Congruent" %><%= ff.radio_button :pairing_type, "Congruent" %>
+                <%= ff.label :pairing_type, "Contrasting", "value" => "Contrasting" %><%= ff.radio_button :pairing_type, "Contrasting" %>
+        <% end %> 
+    
     <br> 
     <br>
+    
 
 <%= f.submit %>
 

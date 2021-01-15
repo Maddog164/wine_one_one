@@ -12,7 +12,7 @@
 
 <h1>Add a Wine</h1>
 <br>
-<%= form_for @wine  do |f| %>
+<%= form_for @wine do |f| %>
     <div class ="settings">
     <%= f.hidden_field :user_id %>
     <%= f.label :wine_name %><%= f.text_field :wine_name %>
@@ -26,19 +26,10 @@
     <%= f.label :acidity %><%= f.text_field :acidity %>
     
     <%= f.label :sweetness %><%= f.text_field :sweetness %>
-    </div>
     <br>
-    Food Pairings:
-    <br>
-    <%= hidden_field_tag "wine[food_ids][]", nil %>
-    <% Food.all.each do |food| %>
-        <%= check_box_tag "wine[food_ids][]", food.id, @wine.food_ids.include?(food.id), id: dom_id(food) %>
-        <%= label_tag dom_id(food), food.food_name %><br>
-    <% end %>
-    <br>
+    
     <strong><em>To Add a New Food Pairing:</em></strong>
-    <br>
-    <%= f.fields_for :foods, @wine.foods.build do |ff| %>
+        <%= f.fields_for :foods, @wine.foods.build do |ff| %>
         <%= ff.hidden_field :id %>
         <%= ff.label :"Food Name:" %>
         <%= ff.text_field :food_name %>
@@ -49,14 +40,7 @@
         
         <br>
         <br>
-        
-        <strong>Type of Pairing: </strong>
-        <%= f.fields_for :pairings do |fff| %>
-            <%= fff.label :pairing_type, "Congruent", "value" => "Congruent" %><%= fff.radio_button :pairing_type, "Congruent", checked: true %>
-            <%= fff.label :pairing_type, "Contrasting", "value" => "Contrasting" %><%= fff.radio_button :pairing_type, "Contrasting", checked: false %>
-            <% end %>  
-
-
+        </div>
     <% end %>
      
         

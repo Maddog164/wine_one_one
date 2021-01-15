@@ -13,37 +13,32 @@ class FoodsController < ApplicationController
     end
     
     def show
-        binding.pry
+        
         @food = Food.find(params[:id])
+        @pairing = Pairing.where(food_id = params[:id]).last
     end
   
     def new
-        binding.pry
+        
         if params[:wine_id] && !Wine.exists?(params[:wine_id])
             redirect_to wines_path, alert: "Wine not found"
         else
-            # @food = Food.new
             @wine = Wine.find(params[:wine_id])
-            # @food = Food.new(wine_id: params[:wine_id])
             @pairings = @wine.pairings.build
         end
-        binding.pry
+        
     end
 
     def create
-        binding.pry
+        
         @food = Food.create(food_params)
-        # @wine = Wine.find(params[:wine_id])
-        # @pairing = @food.pairings.build
-        # @pairing.wine_id = @wine.id
-        # @pairing.pairing_type = params[:pairings][:pairing_type]
-        # @pairing.save
+        
         binding.pry
         if @food.save
             binding.pry
             redirect_to wine_foods_path, notice: "Successfully created Pairing"
         else
-            # binding.pry
+            
             render :new
         end
     end
@@ -53,6 +48,19 @@ class FoodsController < ApplicationController
         @food = Food.find(params[:id])
         @food.update(food_params)
         redirect_to_food_path(@food)
+    end
+
+    def change_pairing_type(id)
+        
+        pairing = Pairing.find(id)
+        if pairing.pairing_type == "Congruent"
+            pairing.pairing_type = "Contrasting"
+        else
+            pairing.pairirng_type = "Congruent"
+        end
+        pairing.save
+       
+
     end
 
     def edit
@@ -75,10 +83,5 @@ class FoodsController < ApplicationController
     def food_params
         params.require(:food).permit(:food_name, :food_sweetness, :food_acidity, :wine_id, pairing_ids:[], pairings_attributes: [:pairing_type])
     end
-
-    # def food_params
-    #     params.require(:wine).permit(:id, :wine_name, :color, :grape, :avg_price, :acidity, :sweetness, :user_id, food_ids:[],\
-    #     foods_attributes: [:id, :food_name, :food_acidity, :food_sweetness], pairings_attributes: [:id, :pairing_type])
-    # end
 
 end

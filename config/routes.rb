@@ -12,7 +12,7 @@ Rails.application.routes.draw do
  root 'sessions#new'
  get 'sessions/new' => 'sessions#new'
 
- resources :wines, only: [:show, :index, :new, :update] do
+ resources :wines do
     resources :foods, only: [:show, :index, :new, :edit]
   end
 

@@ -38,6 +38,16 @@ class PairingsController < ApplicationController
         end
     end
 
+    def update
+        # binding.pry
+        @pairing = Pairing.find(params[:id])
+        @pairing.update(pairing_params)
+        # binding.pry
+        @food = Food.find(@pairing.food_id)
+        # binding.pry
+        redirect_to food_path(@food)
+    end
+
     def show
         @pairing = Pairing.find(params[:id])
     end
@@ -45,7 +55,7 @@ class PairingsController < ApplicationController
     private
 
     def pairing_params
-        params.require(:pairing).permit(:pairing_type, :wine_id, food_ids: [], foods_attributes: [:id, :food_name, :food_sweetness, :food_acidity])
+        params.require(:pairing).permit(:pairing_type, :id, :wine_id, food_ids: [], foods_attributes: [:id, :food_name, :food_sweetness, :food_acidity])
 
     end
 
