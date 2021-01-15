@@ -7,7 +7,7 @@ class Wine < ApplicationRecord
     
     def foods_attributes=(attributes)
         attributes.values.each do |att|
-            binding.pry
+            
             if !att[:food_name].blank?
                 if !Food.find_by(food_name: att[:food_name])
                     food = Food.create(att)
@@ -20,7 +20,7 @@ class Wine < ApplicationRecord
     end
 
     def pairings_attributes=(attributes)
-        binding.pry
+        
         pairing = Pairing.new(attributes["0"])
     end      
    

@@ -41,16 +41,17 @@ class WinesController < ApplicationController
     end
 
     def update
-        binding.pry
-        @wine = Wine.find_by(params[:id])
+        
+        @wine = Wine.find(params[:id])
         if !Pairing.find_by(wine_id: params[:id]).blank? && !@wine.foods.where(food_name: wine_params[:foods_attributes]["0"]["food_name"]).blank?
             #wine and food pairing already exists
             @food = Food.find_by(food_name: wine_params[:foods_attributes]["0"]["food_name"])
             render :action => :show, :alert => "Pairing already exists"
         else
-            binding.pry
+           
             @wine.update(wine_params) #wine and food pairing doesn't exists, so need to create pairing
              # @food = Food.find(params[:food_id])
+            
             @food = Food.find_by(food_name: wine_params[:foods_attributes]["0"]["food_name"])
             @pairing = Pairing.where(wine_id: params[:id],food_id: @food.id)
             @pairing[0].pairing_type = wine_params[:pairings_attributes]["0"]["pairing_type"]

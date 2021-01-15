@@ -13,14 +13,11 @@ class SessionsController < ApplicationController
             u.password = SecureRandom.hex(16)
         end# @user = User.create_from_omniauth(auth)
 
-        binding.pry
         # session[:user_id] = user.id       
         if @user.valid?
-            binding.pry
             session[:user_id] = @user.id
             redirect_to wines_path
         else
-            binding.pry
             flash[:message] = user.errors.full_messages.join(", ")
             redirect_to login_path 
         end
