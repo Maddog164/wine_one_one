@@ -45,7 +45,7 @@ class PairingsController < ApplicationController
         # binding.pry
         @food = Food.find(@pairing.food_id)
         # binding.pry
-        redirect_to food_path(@food)
+        redirect_to wine_food_path(@food.id)
     end
 
     def show

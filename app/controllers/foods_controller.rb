@@ -13,9 +13,14 @@ class FoodsController < ApplicationController
     end
     
     def show
-        
-        @food = Food.find(params[:id])
-        @pairing = Pairing.where(food_id = params[:id]).last
+        binding.pry
+        if !params[:food_id]
+            @pairing = Pairing.where(food_id = params[:id]).last
+            @food = Food.find(@pairing.food_id)
+            binding.pry
+        else
+            @food = Food.find(params[:id])
+        end
     end
   
     def new
