@@ -15,10 +15,12 @@ class FoodsController < ApplicationController
     def show
         
         if !params[:food_id]
-            @pairing = Pairing.where(food_id = params[:id]).last
+            
+            @pairing = Pairing.where(food_id: params[:id]).last
             @food = Food.find(@pairing.food_id)
             
         else
+            
             @food = Food.find(params[:id])
         end
     end

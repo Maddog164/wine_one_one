@@ -4,6 +4,9 @@ class Wine < ApplicationRecord
     has_many :tasting_notes, :through => :wine_tasting_notes
     has_many :pairings, inverse_of: :wine
     has_many :foods, :through => :pairings
+
+    validates :wine_name, presence: true
+    validates :wine_name, uniqueness: true
     
     def foods_attributes=(attributes)
         attributes.values.each do |att|

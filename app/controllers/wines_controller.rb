@@ -25,14 +25,15 @@ class WinesController < ApplicationController
 
 
     def create
-        binding.pry
+        # binding.pry
         if !Wine.find_by(wine_name: wine_params[:wine_name])
-            binding.pry
+            # binding.pry
             @wine = Wine.new(wine_params)
         else
             @wine = Wine.find_by(wine_name: wine_params[:wine_name])
         end
         @wine = Wine.new(wine_params)
+        
         if @wine.save
            redirect_to @wine, notice: "Successfully created Wine"
         else
@@ -46,7 +47,7 @@ class WinesController < ApplicationController
         if !Pairing.find_by(wine_id: params[:id]).blank? && !@wine.foods.where(food_name: wine_params[:foods_attributes]["0"]["food_name"]).blank?
             #wine and food pairing already exists
             @food = Food.find_by(food_name: wine_params[:foods_attributes]["0"]["food_name"])
-            render :action => :show, :alert => "Pairing already exists"
+            redirect_to @wine, notice: "Pairing already exists"
         else
            
             @wine.update(wine_params) #wine and food pairing doesn't exists, so need to create pairing
@@ -56,8 +57,7 @@ class WinesController < ApplicationController
             @pairing = Pairing.where(wine_id: params[:id],food_id: @food.id)
             @pairing[0].pairing_type = wine_params[:pairings_attributes]["0"]["pairing_type"]
             @pairing = @pairing[0].save
-            
-            render :action => :show, :alert => "Pairing created"
+            redirect_to @wine, notice: "Pairing created"
         end
     end
 

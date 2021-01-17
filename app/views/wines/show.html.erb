@@ -1,3 +1,6 @@
+<% if flash[:notice] %>
+    <p class="flash-notice"><%= flash[:notice] %></p>
+<% end %>   
 <h1><%= @wine.wine_name %></h1>
 
 
@@ -17,7 +20,8 @@
         <li class = "tab">Acidity: <%= p.food.food_acidity %></li>
         <li class = "tab">Pairing Type: <%= p.pairing_type %>
         <br>
-        </div> 
+        </div>
+        <br> 
     <% end %>
 
 <% else %>
