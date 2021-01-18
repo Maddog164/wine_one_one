@@ -3,10 +3,10 @@ class Wine < ApplicationRecord
     has_many :wine_tasting_notes
     has_many :tasting_notes, :through => :wine_tasting_notes
     has_many :pairings, inverse_of: :wine
-    has_many :foods, :through => :pairings
+    has_many :foods, :through => :pairings, dependent: :destroy
 
     validates :wine_name, presence: true
-    validates :wine_name, uniqueness: true
+    validates :wine_name, uniqueness: {:scope=>:user_id}
     
     def foods_attributes=(attributes)
         attributes.values.each do |att|
@@ -21,6 +21,7 @@ class Wine < ApplicationRecord
             else
                 self.foods = []
             end
+            
         end 
     end
 

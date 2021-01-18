@@ -28,7 +28,6 @@ class WinesController < ApplicationController
     def create
         # binding.pry
         @wine = Wine.new(wine_params)
-        
         if @wine.save
             
            redirect_to @wine, notice: "Successfully created Wine"
@@ -47,7 +46,6 @@ class WinesController < ApplicationController
         else
            
             @wine.update(wine_params)
-            binding.pry
             #wine and food pairing doesn't exists, so need to create pairing
             @food = Food.where(food_name: wine_params[:foods_attributes]["0"]["food_name"])
             @pairing = Pairing.where(wine_id: params[:id],food_id: @food[0].id)
