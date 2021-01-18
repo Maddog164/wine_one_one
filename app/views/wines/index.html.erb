@@ -1,3 +1,4 @@
+
 <h1>Hi, <%= @user.user_name %></h1>
 
 <% if @wines == nil || @wines == []  %>
@@ -10,14 +11,16 @@
 <% else %>
     <h3>Here are your Wines: </h3>
         <% @wines.each do |w| %>
-        <li><%= link_to w.wine_name, wine_path(w) %></li>
+            <div style="float: left; width: auto;">
+            <li><%= link_to w.wine_name, wine_path(w) %></div>
+            <%= button_to "Delete Wine", wine_path(w), method: :delete %></li>
         <% end %>
 <% end %>
 
 <br>
 
-<%= link_to "Add a New Wine", action: 'new' %>
-    
+<%= link_to "Add a New Wine", action: 'new' %> | <%= link_to "Foods Index", foods_path %>
+
 <br>
 <br>
 

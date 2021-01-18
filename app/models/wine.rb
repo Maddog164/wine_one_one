@@ -18,6 +18,8 @@ class Wine < ApplicationRecord
                     food = Food.find_by(food_name: att[:food_name])
                 end
                 self.foods << food
+            else
+                self.foods = []
             end
         end 
     end
@@ -25,6 +27,7 @@ class Wine < ApplicationRecord
     def pairings_attributes=(attributes)
         
         pairing = Pairing.new(attributes["0"])
+        
     end      
    
 end

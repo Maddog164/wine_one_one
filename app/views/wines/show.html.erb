@@ -31,4 +31,10 @@
 <br>
 <br>
 
-<%= link_to "New Pairing", new_wine_food_path(@wine) %>
+<%= link_to "New Pairing", new_wine_food_path(@wine) %> | <%= link_to "Wines Index", wines_path %> | <%= link_to "Foods Index", foods_path %>
+<br>
+<br>
+
+<%= form_tag ({controller: 'sessions', action: 'destroy', method: 'post'}) do %>
+    <input type=submit value='logout'>
+<% end %>
