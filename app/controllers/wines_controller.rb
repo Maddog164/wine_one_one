@@ -46,9 +46,11 @@ class WinesController < ApplicationController
             redirect_to @wine, notice: "Pairing already exists"
         else
            
-            @wine.update(wine_params) #wine and food pairing doesn't exists, so need to create pairing
+            @wine.update(wine_params)
+            binding.pry
+            #wine and food pairing doesn't exists, so need to create pairing
             @food = Food.where(food_name: wine_params[:foods_attributes]["0"]["food_name"])
-            @pairing = Pairing.where(wine_id: params[:id],food_id: @food.id)
+            @pairing = Pairing.where(wine_id: params[:id],food_id: @food[0].id)
             @pairing[0].pairing_type = wine_params[:pairings_attributes]["0"]["pairing_type"]
             @pairing = @pairing[0].save
             redirect_to @wine, notice: "Pairing created"
