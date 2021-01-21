@@ -13,8 +13,6 @@ class UsersController < ApplicationController
         redirect_to controller: 'wines', action: 'index'
     end
 
-
-
     private
 
     def user_params

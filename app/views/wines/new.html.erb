@@ -9,7 +9,6 @@
     div.settings label:after    { content: ":"; }
     </style>
 </head>
-
 <h1>Add a Wine</h1>
 <% if @wine.errors.any? %>
     <div id="error_explanation">
@@ -21,39 +20,34 @@
     </ul>
     </div>
 <% end %>
-<%= form_for @wine do |f| %>
+<%= form_for @wine do |w| %>
     <div class ="settings">
-    <%= f.hidden_field :user_id %>
-    <%= f.label :wine_name %><%= f.text_field :wine_name %>
-    
-    <%= f.label :color %><%= f.text_field :color %>
-    
-    <%= f.label :grape %><%= f.text_field :grape %>
-        
-    <%= f.label :avg_price %><%= f.text_field :avg_price %>
-    
-    <%= f.label :acidity %><%= f.text_field :acidity %>
-    
-    <%= f.label :sweetness %><%= f.text_field :sweetness %>
+    <%= w.hidden_field :user_id %>
+    <%= w.label :wine_name %><%= w.text_field :wine_name %>
+    <%= w.label :color %><%= w.text_field :color %>
+    <%= w.label :grape %><%= w.text_field :grape %>
+    <%= w.label :avg_price %><%= w.text_field :avg_price %>
+    <%= w.label :acidity %><%= w.text_field :acidity %>
+    <%= w.label :sweetness %><%= w.text_field :sweetness %>
+
+    <strong>To Add a New Food Pairing:</strong>
     <br>
-    
-    <strong><em>To Add a New Food Pairing:</em></strong>
-        <%= f.fields_for :foods, @wine.foods.build do |ff| %>
-        <%= ff.hidden_field :id %>
-        <%= ff.label :"Food Name:" %>
-        <%= ff.text_field :food_name %>
-        <%= ff.label :"Food Acidity:" %>
-        <%= ff.text_field :food_acidity %>
-        <%= ff.label :"Food Sweetness:" %>
-        <%= ff.text_field :food_sweetness %>
+    <%= w.fields_for :pairings, @wine.pairings.build do |pair_build| %>
+        <strong><em>Type of Pairing: </em></strong>
+        <br>
+        <%= pair_build.label :pairing_type, "Congruent", "value" => "Congruent" %><%= pair_build.radio_button :pairing_type, "Congruent" %>
+        <%= pair_build.label :pairing_type, "Contrasting", "value" => "Contrasting" %><%= pair_build.radio_button :pairing_type, "Contrasting" %>
         
-        <br>
-        <br>
+        <%= pair_build.fields_for :food, @wine.pairings.build.build_food do |food_build| %>
+            <%= food_build.label :"Food Name:" %>
+            <%= food_build.text_field :food_name %>
+            <%= food_build.label :"Food Acidity:" %>
+            <%= food_build.text_field :food_acidity %>
+            <%= food_build.label :"Food Sweetness:" %>
+            <%= food_build.text_field :food_sweetness %>
+        <% end %>
         </div>
     <% end %>
-     
-        
     <br>
-    <br>
-    <%= f.submit %>
+    <%= w.submit %>
 <% end %>

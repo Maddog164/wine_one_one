@@ -29,10 +29,8 @@ class Wine < ApplicationRecord
         end 
     end
 
-    # def pairings_attributes=(attributes)
-    #     binding.pry
-    #     pairing = Pairing.new(attributes["0"])
-        
-    # end      
+    def food_exists?(food_name)
+        !self.foods.where(food_name: food_name).blank?
+    end
    
 end

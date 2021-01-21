@@ -12,12 +12,9 @@ class WinesController < ApplicationController
     def new
         @wine = Wine.new
         @wine.user_id = current_user.id
-        @pairings = @wine.pairings.build
-             
     end
 
     def show
-        # binding.pry
         if Wine.find(params[:id]).user_id != current_user.id
             redirect_to root_path
         else
@@ -26,33 +23,22 @@ class WinesController < ApplicationController
     end
 
     def create
-        binding.pry
         @wine = Wine.new(wine_params)
         if @wine.save
-            binding.pry
-           redirect_to @wine, notice: "Successfully created Wine"
+            redirect_to @wine, notice: "Successfully created Wine"
         else
             render :new
         end
     end
 
     def update
-        
         @wine = Wine.find(params[:id])
-        binding.pry
-        if !Pairing.find_by(wine_id: params[:id]).blank? && !@wine.foods.where(food_name: wine_params[:foods_attributes]["0"]["food_name"]).blank?
+        if !Pairing.find_by(wine_id: params[:id]).blank? && @wine.food_exists?(wine_params[:pairings_attributes]["0"][:food_attributes]["food_name"])
             #wine and food pairing already exists
-            @food = Food.where(food_name: wine_params[:foods_attributes]["0"]["food_name"])
             redirect_to @wine, notice: "Pairing already exists"
         else
-           binding.pry
             @wine.update(wine_params)
-            # binding.pry
             #wine and food pairing doesn't exists, so need to create pairing
-            # @food = Food.where(food_name: wine_params[:foods_attributes]["0"]["food_name"])
-            # @pairing = Pairing.find_by(wine_id: params[:id],food_id: @food[0].id)
-            # @pairing[0].pairing_type = wine_params[:pairings_attributes]["0"]["pairing_type"]
-            # @pairing = @pairing[0].save
             redirect_to @wine, notice: "Pairing created"
         end
     end

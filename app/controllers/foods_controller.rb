@@ -13,19 +13,10 @@ class FoodsController < ApplicationController
     end
     
     def show
-        # if !params[:food_id]
-            
-        #     @pairing = Pairing.where(food_id: params[:id]).last
-        #     @food = Food.find(@pairing.food_id)
-            
-        # else
-            
         @food = Food.find(params[:id])
-        # end
     end
   
     def new
-        
         if params[:wine_id] && !Wine.exists?(params[:wine_id])
             redirect_to wines_path, alert: "Wine not found"
         else
@@ -36,7 +27,6 @@ class FoodsController < ApplicationController
     end
 
     def create
-        
         @food = Food.create(food_params)
         if @food.valid?
             redirect_to wine_foods_path, notice: "Successfully created Pairing"
