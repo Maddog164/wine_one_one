@@ -13,16 +13,15 @@ class FoodsController < ApplicationController
     end
     
     def show
-        
-        if !params[:food_id]
+        # if !params[:food_id]
             
-            @pairing = Pairing.where(food_id: params[:id]).last
-            @food = Food.find(@pairing.food_id)
+        #     @pairing = Pairing.where(food_id: params[:id]).last
+        #     @food = Food.find(@pairing.food_id)
             
-        else
+        # else
             
-            @food = Food.find(params[:id])
-        end
+        @food = Food.find(params[:id])
+        # end
     end
   
     def new
@@ -39,26 +38,20 @@ class FoodsController < ApplicationController
     def create
         
         @food = Food.create(food_params)
-        
-        binding.pry
-        if @food.save
-            binding.pry
+        if @food.valid?
             redirect_to wine_foods_path, notice: "Successfully created Pairing"
         else
-            
             render :new
         end
     end
 
     def update
-        binding.pry
         @food = Food.find(params[:id])
         @food.update(food_params)
         redirect_to_food_path(@food)
     end
 
     def change_pairing_type(id)
-        
         pairing = Pairing.find(id)
         if pairing.pairing_type == "Congruent"
             pairing.pairing_type = "Contrasting"
@@ -66,8 +59,6 @@ class FoodsController < ApplicationController
             pairing.pairirng_type = "Congruent"
         end
         pairing.save
-       
-
     end
 
     def edit

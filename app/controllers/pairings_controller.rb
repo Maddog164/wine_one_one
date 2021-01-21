@@ -15,9 +15,9 @@ class PairingsController < ApplicationController
     end
 
     def new
-        binding.pry
+        # binding.pry
         @wine = Wine.find(params[:wine_id])
-        @wine.pairings << Pairing.find_by(params[:wine_id])
+        @pairings = @wine.pairings.build
         # @pairing = Pairing.new
         # @wine.user_id = current_user.id
         # pairing = @wine.pairings.build
@@ -28,9 +28,9 @@ class PairingsController < ApplicationController
 
     def create
         @pairing = Pairing.create(pairing_params)
-        binding.pry
+        # binding.pry
         if @pairing.save
-            binding.pry
+            # binding.pry
             redirect_to @pairing, notice: "Created a New Pairing"
         else
             # binding.pry

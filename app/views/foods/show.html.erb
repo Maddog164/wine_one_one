@@ -9,8 +9,8 @@ Sweetness: <%= @food.food_sweetness %>
 <% @food.wines.each do |wine| %>
     <%= link_to wine.wine_name, wine_path(wine) %>
     
-    <% p = Pairing.where(wine_id: wine.id, food_id: @food.id).first %>
-    
+    <% p = @food.get_pairing(wine.id, @food.id) %>
+        
     <br>
     <%= form_for p do |f| %>
         <%= f.label :pairing_type, "Congruent", "value" => "Congruent" %><%= f.radio_button :pairing_type, "Congruent" %>

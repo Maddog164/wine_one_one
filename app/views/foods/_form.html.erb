@@ -12,35 +12,31 @@
 
 <h1>Create a New Food Pairing for <%= @wine.wine_name %></h1>
 <br>
-<%= form_for @wine do |f| %>
-    
+<%= form_for @wine do |w| %>
+      
     <div class ="settings">
-    <%= f.fields_for :foods, @wine.foods.build do |ff| %>
-    
-        <%= ff.label :"Food Name" %>
-  
-        <%= ff.text_field :food_name %>
-        <%= ff.label :"Food Acidity" %>
-        <%= ff.text_field :food_acidity %>
-        <%= ff.label :"Food Sweetness" %>
-        <%= ff.text_field :food_sweetness %>
-        </div>
-
-        <% end %>   
-        
-        <br>
+    <%= w.fields_for :pairings, @wine.pairings.build do |pair_build| %>
         <strong>Type of Pairing: </strong>
-        
-        <%= f.fields_for :pairings, @wine.pairings.build do |ff| %>
-                <%= ff.label :pairing_type, "Congruent", "value" => "Congruent" %><%= ff.radio_button :pairing_type, "Congruent" %>
-                <%= ff.label :pairing_type, "Contrasting", "value" => "Contrasting" %><%= ff.radio_button :pairing_type, "Contrasting" %>
+        <br>
+        <%= pair_build.label :pairing_type, "Congruent", "value" => "Congruent" %><%= pair_build.radio_button :pairing_type, "Congruent" %>
+        <%= pair_build.label :pairing_type, "Contrasting", "value" => "Contrasting" %><%= pair_build.radio_button :pairing_type, "Contrasting" %>
+    
+        <%= pair_build.fields_for :food, @wine.pairings.build.build_food do |food_build| %> 
+            <%= food_build.label :"Food Name" %>
+            <%= food_build.text_field :food_name %>
+            <%= food_build.label :"Food Acidity" %>
+            <%= food_build.text_field :food_acidity %>
+            <%= food_build.label :"Food Sweetness" %>
+            <%= food_build.text_field :food_sweetness %>
+            </div>
+        <br>
         <% end %> 
-    
+   <% end %>
+        
     <br> 
-    <br>
-    
+    <br> 
 
-<%= f.submit %>
+<%= w.submit %>
 
 <% end %>
 
