@@ -32,5 +32,9 @@ class Wine < ApplicationRecord
     def food_exists?(food_name)
         !self.foods.where(food_name: food_name).blank?
     end
+
+    def self.short_wines(wine_name)
+        Wine.where("wine_name LIKE ?", "%#{wine_name}%")
+    end
    
 end

@@ -5,7 +5,11 @@ class WinesController < ApplicationController
     before_action :require_login
 
     def index
-        @wines = Wine.where(:user_id => current_user.id)
+        if !params[:wine_name]
+            @wines = current_user.wines
+        else
+            @wines = Wine.short_wines(params[:wine_name])
+        end
     end
 
     
